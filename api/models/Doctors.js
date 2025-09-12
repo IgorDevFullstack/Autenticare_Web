@@ -14,7 +14,7 @@ import mongoose from 'mongoose';
          default: null,
      },
      isAdmin:{
-       type: Boolean,
+        type: Boolean,
         default: false,
      }
    
