@@ -18,8 +18,8 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000', // dev local
-    'https://autenticareweb-production.up.railway.app' // domínio público da API
-    // depois adicione também o domínio do frontend (ex: https://autenticare.vercel.app)
+    'https://autenticareweb-production.up.railway.app', // domínio público da API
+    'https://igor-autenticare-web.vercel.app/'
   ],
   credentials: true,
 }));
