@@ -1,0 +1,9 @@
+# Ignore a API (ela roda na Railway)
+api/
+api/**
+
+# Outros que não precisa subir
+*.md
+node_modules/
+api/node_modules/
+**/.env
