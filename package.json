@@ -23,9 +23,10 @@
     "react-icons": "^4.2.0",
     "react-modal": "^3.13.1",
     "react-router-dom": "^6.4.3",
-    "react-scripts": "4.0.2",
     "sweetalert": "^2.1.2",
-    "web-vitals": "^1.1.0"
+    "web-vitals": "^1.1.0",
+    "react-scripts": "^5.0.1",
+    "sass": "^1.92.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,5 +52,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://dental-doctor-api.onrender.com"
+  "proxy": "https://autenticareweb-production.up.railway.app",
+  "engines": {
+    "node": "22.x"
+  }
 }
