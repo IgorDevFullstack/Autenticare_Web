@@ -16,7 +16,11 @@ import doctorRoutes from './routes/doctor.js';
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000'], // ajuste se o front rodar em outra URL/domínio
+  origin: [
+    'http://localhost:3000', // dev local
+    'https://autenticareweb-production.up.railway.app' // domínio público da API
+    // depois adicione também o domínio do frontend (ex: https://autenticare.vercel.app)
+  ],
   credentials: true,
 }));
 app.use(express.json());           // substitui body-parser.json
