@@ -15,15 +15,34 @@ import doctorRoutes from './routes/doctor.js';
 // 3) app e middlewares
 const app = express();
 
-app.use(cors({
-  origin: [
-    'http://localhost:3000', // dev local
-    'https://autenticareweb-production.up.railway.app', // domínio público da API
-    'https://igor-autenticare-web.vercel.app/'
-  ],
+// --- CORS (permitir localhost e vercel.app) ---
+const allowed = [
+  'http://localhost:3000',
+  /\.vercel\.app$/ // cobre produção e previews da Vercel
+  // se tiver domínio próprio do front, adicione aqui: 'https://app.seudominio.com'
+];
+
+const corsOptions = {
+  origin(origin, cb) {
+    // permite tools sem Origin (curl/Postman/health)
+    if (!origin) return cb(null, true);
+    const ok = allowed.some((entry) =>
+      entry instanceof RegExp ? entry.test(origin) : entry === origin
+    );
+    return ok ? cb(null, true) : cb(new Error(`Not allowed by CORS: ${origin}`));
+  },
   credentials: true,
-}));
-app.use(express.json());           // substitui body-parser.json
+  methods: ['GET','HEAD','PUT','PATCH','POST','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization','X-Requested-With'],
+  exposedHeaders: ['Set-Cookie'],
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+// ----------------------------------------------
+
+app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
 app.use(express.static('doctors')); // garanta que a pasta exista
@@ -32,6 +51,7 @@ app.use(express.static('doctors')); // garanta que a pasta exista
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, time: new Date().toISOString() });
 });
+
 app.use('/', doctorRoutes);
 
 // 5) handler de erros
@@ -54,7 +74,6 @@ const PORT = process.env.PORT || 5000;
 
 async function start() {
   try {
-    // use a string completa no .env (com DB name): process.env.MONGO
     await mongoose.connect(process.env.MONGO);
     console.log('✅ Connected to MongoDB');
 
