@@ -44,7 +44,7 @@ const Pop = () => {
                     </Popover.Header>
                     <Popover.Body>
                         <p className="userName">{user.email}</p>
-                        <Link className="nav-link userName" to="/dashboard">Deshboard</Link>
+                        <Link className="nav-link userName" to="/dashboard">Dashboard</Link>
                         <Button variant="outline-danger" size="sm" onClick={hanldeSignOut}>
                             {loading ? <Spinner animation="border" variant="info" /> : "Sign OUt"}
                         </Button>
