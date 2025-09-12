@@ -7,7 +7,7 @@ import './Header.css';
 const Header = () => {
     return (
         <header>
-            <Navbar></Navbar>
+            <Navbar>jjjjj</Navbar>
             <HeaderTop></HeaderTop>
             <BusinessInfo></BusinessInfo>
         </header>
